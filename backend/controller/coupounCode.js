@@ -65,7 +65,28 @@ router.delete(
         message: "Coupon code deleted successfully!",
       });
     } catch (error) {
-      return next(new ErrorHandler(error, 400));
+      return next(new ErrorHandler("Coupon code doesn't exist!", 400));
+
+    }
+  })
+);
+// delete coupoun code of a shop
+router.delete(
+  "/delete-coupon/:id",
+  isSeller,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const couponCode = await CouponCode.findByIdAndDelete(req.params.id); // Fixed typo here
+
+      if (!couponCode) {
+        return next(new ErrorHandler("Coupon code doesn't exist!", 400)); // Fixed typo in error message
+      }
+      res.status(200).json({ // Changed status code to 200
+        success: true,
+        message: "Coupon code deleted successfully!",
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message || "Server Error", 500)); // Improved error handling
     }
   })
 );

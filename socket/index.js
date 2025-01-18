@@ -1,10 +1,37 @@
 const socketIO = require("socket.io");
 const http = require("http");
+// const https = require("https");
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
+// const fs = require('fs');
+
+
+//
+// const options = {
+//   key: fs.readFileSync('../server.key'),  // Replace with the correct path to server.key
+//   cert: fs.readFileSync('../server.crt')  // Replace with the correct path to server.cert
+// };
+// //
+
+//
+// const server = 
+// https.createServer(options, app);
+// //
+//
+// server.listen(3000, () => {
+//   console.log('Server is running on https://localhost:3000');
+// });
+// //
+
+
+// // const server = http.createServer(app);
+// const io = socketIO(server);
+
+
+
 
 require("dotenv").config({
   path: "./.env",
